@@ -8,9 +8,4 @@ Simple Ping Pong game for two players written in Go. Just for fun :)
 - Press SPACE to serve
 - Press R to reset
 
-## Known issues
-- The collision model needs some refinement
-- The ball acceleration model needs some refinement
-- The ball's bounce directions are random - it could depend on the bounce location on the paddle
-
 ### GL & HF :)

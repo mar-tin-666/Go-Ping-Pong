@@ -64,10 +64,12 @@ func (g *Game) Update() error {
 		ballY += int(float64(ballSpeedY) * deltaTime)
 
 		// Collision with walls
-		if ballY <= 0 || ballY+ballRadius >= screenHeight {
+		if ballY <= 0 && ballSpeedY < 0 {
 			ballSpeedY = -ballSpeedY
 		}
-
+		if ballY+ballRadius >= screenHeight && ballSpeedY > 0 {
+			ballSpeedY = -ballSpeedY
+		}
 		// Collision with the left paddle
 		if ballX <= paddleWidth && ballY+ballRadius >= leftPaddleY && ballY <= leftPaddleY+paddleHeight {
 			ballSpeedX = int(math.Abs(float64(ballSpeedX)))
@@ -127,14 +129,13 @@ func paddleTouchesBall() bool {
 // Increase ball speed
 func adjustBallSpeed(paddleY int) {
 	distFromCenter := (ballY) - (paddleY + paddleHeight/2)
-	ballSpeedY += int(distFromCenter / 10)
+	ballSpeedY += int(distFromCenter * 2)
 
 	if ballSpeedX < 0 {
-		ballSpeedX -= 1
+		ballSpeedX -= ballAcceleration
 	} else {
-		ballSpeedX += 1
+		ballSpeedX += ballAcceleration
 	}
-
 	if math.Abs(float64(ballSpeedY)) < minBallSpeedY {
 		ballSpeedY = minBallSpeedY * int(math.Copysign(1, float64(ballSpeedY)))
 	}

@@ -13,9 +13,10 @@ const (
 	paddleWidth      = 10
 	paddleHeight     = 80
 	ballRadius       = 5
-	paddleSpeed      = 4
+	paddleSpeed      = 5
 	initialBallSpeed = 300
 	minBallSpeedY    = 1
+	ballAcceleration = 50
 )
 
 var (
